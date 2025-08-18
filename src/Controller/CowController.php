@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\CowService;
 
 final class CowController extends AbstractController
 {
@@ -22,22 +23,24 @@ final class CowController extends AbstractController
     }
 
     #[Route('/cow/new', name: 'cow_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function new(Request $request, CowService $cowService): Response {
         $cow = new Cow();
         $form = $this->createForm(CowType::class, $cow);
         $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            try {
+                $cowService->create($cow);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($cow);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('cow_index', [], Response::HTTP_SEE_OTHER);
+                $this->addFlash('success', 'Vaca criada');
+                return $this->redirectToRoute('cow_index');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Erro: '.$e->getMessage());
+            }
         }
 
         return $this->render('cow/new.html.twig', [
             'cow' => $cow,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

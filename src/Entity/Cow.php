@@ -18,8 +18,10 @@ class Cow
     private ?int $id = null;
 
     #[ORM\Column(length: 20)]
-    #[Assert\NotBlank(message: "O codigo é obrigatorio")]
-    #[Assert\Regex(pattern: "[A-Z]{3}-\d{4}-\d{4,6}$", message: "Formato de código inválido FAZ-ANO-SEQ")]
+    #[Assert\NotBlank(message: "O código é obrigatório")]
+    #[Assert\Regex(pattern: "/^[A-Z]{3}-\d{4}-\d{4,6}$/",
+        message: "Formato de código inválido (ex: FAZ-2025-0001)"
+    )]
     private ?string $code = null;
 
     #[ORM\Column]
