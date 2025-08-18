@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cadastrar Novo Gado{% endblock %}
+
+{% block body %}
+    <h1>Novo Gado</h1>
+
+    {{ include('cow/_form.html.twig') }}
+
+    <a href="{{ path('cow_index') }}">Voltar</a>
+{% endblock %}

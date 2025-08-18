@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de Gados{% endblock %}
+
+{% block body %}
+    <h1>Lista de Gados</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Codigo</th>
+                <th>Leite</th>
+                <th>Ração</th>
+                <th>Peso</th>
+                <th>Nascimento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cow in cows %}
+            <tr>
+                <td>{{ cow.id }}</td>
+                <td>{{ cow.code }}</td>
+                <td>{{ cow.milk }}</td>
+                <td>{{ cow.food }}</td>
+                <td>{{ cow.weight }}</td>
+                <td>{{ cow.birth ? cow.birth|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('cow_show', {'id': cow.id}) }}">Visualizar</a>
+                    <a href="{{ path('cow_edit', {'id': cow.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Nenhum dado registrado</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('cow_new') }}">Adicionar</a>
+{% endblock %}

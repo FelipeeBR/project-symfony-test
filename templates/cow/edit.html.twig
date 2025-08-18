@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Gado{% endblock %}
+
+{% block body %}
+    <h1>Editar Gado</h1>
+
+    {{ include('cow/_form.html.twig', {'button_label': 'Atualizar'}) }}
+
+    <a href="{{ path('cow_index') }}">Voltar</a>
+
+    {{ include('cow/_delete_form.html.twig') }}
+{% endblock %}

@@ -36,9 +36,16 @@ class Farm
     #[ORM\ManyToMany(targetEntity: Veterinarian::class, inversedBy: 'farms')]
     private Collection $veterinarian;
 
+    /**
+     * @var Collection<int, Cow>
+     */
+    #[ORM\OneToMany(targetEntity: Cow::class, mappedBy: 'farm')]
+    private Collection $cows;
+
     public function __construct()
     {
         $this->veterinarian = new ArrayCollection();
+        $this->cows = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,6 +109,36 @@ class Farm
     public function removeVeterinarian(Veterinarian $veterinarian): static
     {
         $this->veterinarian->removeElement($veterinarian);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cow>
+     */
+    public function getCows(): Collection
+    {
+        return $this->cows;
+    }
+
+    public function addCow(Cow $cow): static
+    {
+        if (!$this->cows->contains($cow)) {
+            $this->cows->add($cow);
+            $cow->setFarm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCow(Cow $cow): static
+    {
+        if ($this->cows->removeElement($cow)) {
+            // set the owning side to null (unless already changed)
+            if ($cow->getFarm() === $this) {
+                $cow->setFarm(null);
+            }
+        }
 
         return $this;
     }
