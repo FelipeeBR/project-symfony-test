@@ -13,21 +13,21 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class VeterinarianController extends AbstractController
 {
-    #[Route('/veterinarians', name: 'veterinarian_index')]
+    #[Route('/veterinarians', name: 'veterinarian_index', methods: ['GET'])]
     public function index(VeterinarianRepository $veterinarianRepository): Response {
         return $this->render('veterinarian/index.html.twig', [
             'veterinarians' => $veterinarianRepository->findAll(),
         ]);
     }
 
-    #[Route('/veterinarian/{id<\d+>}', name: 'veterinarian_show')]
+    #[Route('/veterinarian/{id<\d+>}', name: 'veterinarian_show', methods: ['GET'])]
     public function show(string $id, VeterinarianRepository $veterinarianRepository): Response {
         return $this->render('veterinarian/show.html.twig', [
             'veterinarian' => $veterinarianRepository->find($id),
         ]);
     }
 
-    #[Route('/veterinarian/new', name: 'veterinarian_new')]
+    #[Route('/veterinarian/new', name: 'veterinarian_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response {
         $veterinarian = new Veterinarian;
         
@@ -45,7 +45,7 @@ final class VeterinarianController extends AbstractController
         ]);
     }
 
-    #[Route('/veterinarian/{id<\d+>}/edit', name: 'veterinarian_edit')]
+    #[Route('/veterinarian/{id<\d+>}/edit', name: 'veterinarian_edit', methods: ['GET', 'POST'])]
     public function edit(Veterinarian $veterinarian, Request $request, EntityManagerInterface $entityManager): Response {
         $form = $this->createForm(VeterinarianType::class, $veterinarian);
         $form->handleRequest($request);
@@ -62,7 +62,7 @@ final class VeterinarianController extends AbstractController
         ]);
     }
 
-    #[Route('/veterinarian/{id<\d+>}/delete', name: 'veterinarian_delete')]
+    #[Route('/veterinarian/{id<\d+>}/delete', name: 'veterinarian_delete', methods: ['POST'])]
     public function delete(Veterinarian $veterinarian, EntityManagerInterface $entityManager) {
         $entityManager->remove($veterinarian);
         $entityManager->flush();

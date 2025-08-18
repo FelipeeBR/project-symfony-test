@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Veterinarios{% endblock %}
+{% block title %}Lista de Veterinarios{% endblock %}
 
 {% block body %}
     <h1>Veterinarios</h1>
@@ -19,12 +19,9 @@
                     <td>{{ veterinarian.name }}</td>
                     <td>{{ veterinarian.crmv }}</td>
                     <td>
+                        <a href="{{ path('veterinarian_show', {'id': veterinarian.id}) }}">Visualizar</a>
                         <a href="{{ path('veterinarian_edit', {'id': veterinarian.id }) }}">Editar</a>
-                        <form action="{{ path('veterinarian_delete', {'id': veterinarian.id}) }}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ veterinarian.id) }}">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit">Deletar</button>
-                        </form>
+                        {{ include('veterinarian/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% endfor %}

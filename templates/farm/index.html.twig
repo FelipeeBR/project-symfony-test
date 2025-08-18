@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fazendas{% endblock %}
+
+{% block body %}
+    <h1>Lista de Fazendas</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Tamanho</th>
+                <th>Responsavel</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for farm in farms %}
+            <tr>
+                <td>{{ farm.id }}</td>
+                <td>{{ farm.name }}</td>
+                <td>{{ farm.size }}</td>
+                <td>{{ farm.responsible }}</td>
+                <td>
+                    <a href="{{ path('farm_show', {'id': farm.id}) }}">Visualizar</a>
+                    <a href="{{ path('farm_edit', {'id': farm.id}) }}">Editar</a>
+                    {{ include('farm/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Nenhum dado registrado</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('farm_new') }}">Adicionar</a>
+{% endblock %}

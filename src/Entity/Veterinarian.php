@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VeterinarianRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,6 +25,17 @@ class Veterinarian
     #[ORM\Column(length: 20, unique: true)]
     #[Assert\Regex(pattern: '/^CRMV-[A-Z]{2}-\d{4,6}$/', message: "O CRMV deve ser valido")]
     private ?string $crmv = null;
+
+    /**
+     * @var Collection<int, Farm>
+     */
+    #[ORM\ManyToMany(targetEntity: Farm::class, mappedBy: 'veterinarian')]
+    private Collection $farms;
+
+    public function __construct()
+    {
+        $this->farms = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -49,6 +62,33 @@ class Veterinarian
     public function setCrmv(string $crmv): static
     {
         $this->crmv = $crmv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Farm>
+     */
+    public function getFarms(): Collection
+    {
+        return $this->farms;
+    }
+
+    public function addFarm(Farm $farm): static
+    {
+        if (!$this->farms->contains($farm)) {
+            $this->farms->add($farm);
+            $farm->addVeterinarian($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFarm(Farm $farm): static
+    {
+        if ($this->farms->removeElement($farm)) {
+            $farm->removeVeterinarian($this);
+        }
 
         return $this;
     }

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cadastrar Nova Fazenda{% endblock %}
+
+{% block body %}
+    <h1>Nova Fazenda</h1>
+
+    {{ include('farm/_form.html.twig') }}
+
+    <a href="{{ path('farm_index') }}">Voltar</a>
+{% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Veterinario{% endblock %}
+{% block title %}Veterinario {{ veterinarian.name }}{% endblock %}
 
 {% block body %}
-    <h1>Veterinario {{ veterinarian.id }}</h1>
+    <h1>Veterinario {{ veterinarian.name }}</h1>
     <a href="{{ path('veterinarian_edit', {'id': veterinarian.id }) }}">Editar</a>
+    {{ include('veterinarian/_delete_form.html.twig') }}
 {% endblock %}
