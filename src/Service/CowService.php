@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Cow;
-use App\Entity\Veterinario;
 use App\Repository\CowRepository;
 use App\Repository\FarmRepository;
 use App\Repository\VeterinarioRepository;
@@ -27,6 +26,19 @@ class CowService {
 
         if(count($errors) > 0) {
             throw new BadRequestHttpException($errors[0]->getMessage());
+        }
+        $cowFarm = $cow->getFarm();
+        if(!$cowFarm) {
+            throw new \Exception("A vaca deve estar associada a uma fazenda");
+        }
+
+        if($cow->getBirth() > new \DateTime()) {
+            throw new \Exception("Data de nascimento não pode ser maior que a data atual");
+        }
+
+        $farm = $this->farmRepository->find($cowFarm->getId());
+        if(!$farm) {
+            throw new \Exception("Fazenda não encontrada");
         }
 
         if(count($farm->getCows()) >= $allowedQuantity) {
