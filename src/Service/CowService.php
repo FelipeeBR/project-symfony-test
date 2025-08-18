@@ -49,19 +49,4 @@ class CowService {
 
         return $cow;
     }
-
-    /*public function findSlaughter() {
-        $arroba = 18 * 15;
-        return Cow::where(function ($query) use ($arroba) {
-            $query->whereRaw('TIMESTAMPDIFF(YEAR, birth, CURDATE()) > 5')
-                  ->orWhere('milk', '<', 40)
-                  ->orWhere(function ($sub) {
-                      $sub->where('milk', '<', 70)
-                          ->whereRaw('(food / 7) > 50');
-                  })
-                  ->orWhere('wheight', '>', $arroba);
-        })
-        ->where('abatido', false)
-        ->paginate(3);
-    }*/
 }

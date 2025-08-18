@@ -29,6 +29,7 @@ final class CowController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             try {
+                //dd($request);
                 $cowService->create($cow);
 
                 $this->addFlash('success', 'Vaca criada');
@@ -79,5 +80,13 @@ final class CowController extends AbstractController
         }
 
         return $this->redirectToRoute('cow_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/lista-abatimentos', name: 'cow_slaughter', methods: ['GET'])]
+    public function listSlaughters(CowRepository $cowRepository): Response {
+        $listSlaughter = $cowRepository->findSlaughter();
+        return $this->render('cow/slaughter.html.twig', [
+            'listSlaughter' => $listSlaughter,
+        ]);
     }
 }

@@ -44,7 +44,7 @@ class Cow
     private ?Farm $farm = null;
 
     #[ORM\Column(type: "boolean", nullable: true)]
-    private ?bool $slaughtered = null;
+    private ?bool $slaughtered = false;
 
     public function getId(): ?int
     {

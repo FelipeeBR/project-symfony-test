@@ -1,0 +1,31 @@
+<div>
+    <h1>Gados para Abate</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Leite (L/dia)</th>
+                <th>Peso (kg)</th>
+                <th>Ração (kg/semana)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cow in listSlaughter %}
+                <tr>
+                    <td>{{ cow.id }}</td>
+                    <td>{{ cow.code }}</td>
+                    <td>{{ cow.birth ? cow.birth|date('Y-m-d') : 'N/A' }}</td>
+                    <td>{{ cow.milk }}</td>
+                    <td>{{ cow.weight }}</td>
+                    <td>{{ cow.food }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Nenhum gado selecionado para abate.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

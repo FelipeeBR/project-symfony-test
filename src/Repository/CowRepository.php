@@ -16,28 +16,22 @@ class CowRepository extends ServiceEntityRepository
         parent::__construct($registry, Cow::class);
     }
 
-    //    /**
-    //     * @return Cow[] Returns an array of Cow objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findSlaughter() {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT * FROM cow c
+            WHERE c.slaughtered = 0
+            AND (
+                TIMESTAMPDIFF(YEAR, c.birth, CURRENT_DATE()) > 5
+                OR ROUND(c.milk, 2) < 40
+                OR (ROUND(c.milk, 2) < 70 AND (c.food / 7) > 50)
+                OR c.weight > :arroba
+            )
+        ";
 
-    //    public function findOneBySomeField($value): ?Cow
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery(['arroba' => 18 * 15]);
+
+        return $result->fetchAllAssociative();
+    }
 }
