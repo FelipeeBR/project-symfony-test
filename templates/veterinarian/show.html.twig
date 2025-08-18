@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Veterinario{% endblock %}
+
+{% block body %}
+    <h1>Veterinario {{ veterinarian.id }}</h1>
+    <a href="{{ path('veterinarian_edit', {'id': veterinarian.id }) }}">Editar</a>
+{% endblock %}
