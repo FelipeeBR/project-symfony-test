@@ -43,6 +43,9 @@ class Cow
     #[ORM\ManyToOne(inversedBy: 'cows')]
     private ?Farm $farm = null;
 
+    #[ORM\Column(type: "boolean", nullable: true)]
+    private ?bool $slaughtered = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -116,6 +119,18 @@ class Cow
     public function setFarm(?Farm $farm): static
     {
         $this->farm = $farm;
+
+        return $this;
+    }
+
+    public function isSlaughtered(): ?bool
+    {
+        return $this->slaughtered;
+    }
+
+    public function setSlaughtered(?bool $slaughtered): static
+    {
+        $this->slaughtered = $slaughtered;
 
         return $this;
     }

@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Entity\Cow;
 use App\Repository\CowRepository;
 use App\Repository\FarmRepository;
-use App\Repository\VeterinarioRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -50,4 +49,19 @@ class CowService {
 
         return $cow;
     }
+
+    /*public function findSlaughter() {
+        $arroba = 18 * 15;
+        return Cow::where(function ($query) use ($arroba) {
+            $query->whereRaw('TIMESTAMPDIFF(YEAR, birth, CURDATE()) > 5')
+                  ->orWhere('milk', '<', 40)
+                  ->orWhere(function ($sub) {
+                      $sub->where('milk', '<', 70)
+                          ->whereRaw('(food / 7) > 50');
+                  })
+                  ->orWhere('wheight', '>', $arroba);
+        })
+        ->where('abatido', false)
+        ->paginate(3);
+    }*/
 }
