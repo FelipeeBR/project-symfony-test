@@ -14,14 +14,15 @@ class CowType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('code')
-            ->add('milk')
-            ->add('food')
-            ->add('weight')
-            ->add('birth')
+            ->add('code', null, ['label' => 'Código', 'required' => true])
+            ->add('milk', null, ['label' => 'Leite produzido por semana (em litros)'])
+            ->add('food', null, ['label' => 'Ração consumido por semana (em quilogramas)'])
+            ->add('weight', null, ['label' => 'Peso (em quilogramas)'])
+            ->add('birth', null, ['label' => 'Data de nascimento'])
             ->add('farm', EntityType::class, [
                 'class' => Farm::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
+                'label' => 'Fazenda',
             ])
         ;
     }
