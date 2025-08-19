@@ -46,10 +46,9 @@ final class CowController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             try {
-                //dd($request);
                 $cowService->create($cow);
 
-                $this->addFlash('success', 'Gado criado');
+                $this->addFlash('success', 'Gado criado com sucesso');
                 return $this->redirectToRoute('cow_index');
             } catch (\Exception $e) {
                 $this->addFlash('error', 'Erro: '.$e->getMessage());
@@ -78,7 +77,7 @@ final class CowController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'Gado atualizado com sucesso');
             return $this->redirectToRoute('cow_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -95,7 +94,7 @@ final class CowController extends AbstractController
             $entityManager->remove($cow);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'Gado excluido com sucesso');
         return $this->redirectToRoute('cow_index', [], Response::HTTP_SEE_OTHER);
     }
 
@@ -116,6 +115,7 @@ final class CowController extends AbstractController
 
         $cow->setSlaughtered(true);
         $em->flush();
+        $this->addFlash('success', 'Foi para o abate com sucesso');
         return $this->redirectToRoute('cow_index');
 }
 }

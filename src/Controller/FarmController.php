@@ -47,7 +47,7 @@ final class FarmController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($farm);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Fazenda criada com sucesso');
             return $this->redirectToRoute('farm_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -71,7 +71,7 @@ final class FarmController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'Fazenda atualizada com sucesso');
             return $this->redirectToRoute('farm_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -87,7 +87,7 @@ final class FarmController extends AbstractController
             $entityManager->remove($farm);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'Fazenda excluida com sucesso');
         return $this->redirectToRoute('farm_index', [], Response::HTTP_SEE_OTHER);
     }
 }

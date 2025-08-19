@@ -65,7 +65,7 @@ final class VeterinarianController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($veterinarian);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Veterinário criado com sucesso');
             return $this->redirectToRoute('veterinarian_show', ['id' => $veterinarian->getId()]);
         }
         return $this->render('veterinarian/new.html.twig', [
@@ -82,6 +82,7 @@ final class VeterinarianController extends AbstractController
             $entityManager->persist($veterinarian);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Veterinário atualizado com sucesso');
             return $this->redirectToRoute('veterinarian_show', ['id' => $veterinarian->getId()]);
         }
         return $this->render('veterinarian/edit.html.twig', [
@@ -94,6 +95,7 @@ final class VeterinarianController extends AbstractController
     public function delete(Veterinarian $veterinarian, EntityManagerInterface $entityManager) {
         $entityManager->remove($veterinarian);
         $entityManager->flush();
+        $this->addFlash('success', 'Veterinário excluido com sucesso');
         return $this->redirectToRoute('veterinarian_index');
     }
 }
