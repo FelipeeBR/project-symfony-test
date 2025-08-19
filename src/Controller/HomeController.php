@@ -21,4 +21,12 @@ class HomeController extends AbstractController
             'totalCowAndFood' => $totalCowAndFood
         ]);
     }
+
+    #[Route('/slaughtered', name: 'app_slaughtered')]
+    public function slaughter(CowRepository $cowRepository): Response {
+        $listSlaughtered = $cowRepository->findSlaughtered();
+        return $this->render('home/slaughtered.html.twig', [
+            'listSlaughtered' => $listSlaughtered,
+        ]);
+    }
 }

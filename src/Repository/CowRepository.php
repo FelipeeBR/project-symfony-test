@@ -75,4 +75,17 @@ class CowRepository extends ServiceEntityRepository
 
         return $result->fetchAssociative();
     }
+
+    public function findSlaughtered() {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT * FROM cow c
+            WHERE c.slaughtered = 1
+        ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery();
+
+        return $result->fetchAllAssociative();
+    }
 }

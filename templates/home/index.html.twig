@@ -23,28 +23,45 @@
             </a>
         </div>
 
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Leite</h5>
-                    <p class="card-text text-center">Total de leite produzido por semana</p>
-                    <h3 class="text-center">{{ totalMilk }} Litros</h3>
+        <div class="row justify-content-center gap-3 mt-4">
+            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Leite</h5>
+                        <p class="card-text">Total de leite produzido por semana</p>
+                        <h3>{{ totalMilk }} Litros</h3>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Ração</h5>
-                    <p class="card-text text-center">Total de ração consumida por semana</p>
-                    <h3 class="text-center">{{ totalFood }} kgs</h3>
+    
+            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Ração</h5>
+                        <p class="card-text">Total de ração consumida por semana</p>
+                        <h3>{{ totalFood }} kgs</h3>
+                    </div>
                 </div>
             </div>
-
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Quantidade</h5>
-                    <p class="card-text text-center">Animais até 1 ano e 500Kg+ de ração por semana</p>
-                    <h3 class="text-center">{{ totalCowAndFood.total_animals }}</h3>
-                    <a href="" class="btn btn-primary">Relatório</a>
+    
+            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Quantidade</h5>
+                        <p class="card-text">Animais até 1 ano e 500Kg+ de ração por semana</p>
+                        <h3>{{ totalCowAndFood.total_animals }}</h3>
+                        <a href="" class="btn btn-primary mt-2">Ver Relatório</a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Abatidos</h5>
+                        <p class="card-text">Relatórios de animais abatidos</p>
+                        <a href="{{path('app_slaughtered')}}" class="btn btn-primary mt-2">Ver Relatório</a>
+                    </div>
                 </div>
             </div>
         </div>
