@@ -2,6 +2,25 @@
 
 ### Candidato: Felipe Mendes
 
+### Como Instalar?
+1 - Clone o projeto
+
+2 - Subir os containers
+```
+docker-compose up -d --build
+```
+3 - Acessar o container app
+```
+docker exec -it symfony_app bash
+```
+4 - Dentro do container execute
+```
+composer install
+php bin/console doctrine:database:create
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+```
+
 ### O que foi utilizado?
 - Framework Symfony
 - Docker
