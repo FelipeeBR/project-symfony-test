@@ -11,14 +11,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\CowService;
+use Knp\Component\Pager\PaginatorInterface;
 
 final class CowController extends AbstractController
 {
     #[Route('/cows', name: 'cow_index', methods: ['GET'])]
-    public function index(CowRepository $cowRepository): Response
-    {
+    public function index(CowRepository $cowRepository, PaginatorInterface $paginator, Request $request): Response {
+        $queryBuilder = $cowRepository->createQueryBuilder('c');
+
+        if($request->query->get('sort')) {
+            $queryBuilder->orderBy(
+                'c.' . $request->query->get('sort'),
+                $request->query->get('direction', 'asc')
+            );
+        } else {
+            $queryBuilder->orderBy('c.id', 'asc');
+        }
+
+        $cows = $paginator->paginate(
+            $queryBuilder->getQuery(),
+            $request->query->getInt('page', 1), 
+            3                     
+        );
+
         return $this->render('cow/index.html.twig', [
-            'cows' => $cowRepository->findAll(),
+            'cows' => $cows,
         ]);
     }
 
@@ -32,7 +49,7 @@ final class CowController extends AbstractController
                 //dd($request);
                 $cowService->create($cow);
 
-                $this->addFlash('success', 'Vaca criada');
+                $this->addFlash('success', 'Gado criado');
                 return $this->redirectToRoute('cow_index');
             } catch (\Exception $e) {
                 $this->addFlash('error', 'Erro: '.$e->getMessage());

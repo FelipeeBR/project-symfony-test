@@ -1,16 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lista de vacas{% endblock %}
+{% block title %}Lista de Gados{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="h2"><i class="fas fa-cow me-2"></i>Lista de Vacas</h1>
-                    <a href="{{ path('cow_new') }}" class="btn btn-success">
-                        <i class="fas fa-plus me-1"></i> Adicionar Vaca
-                    </a>
+                    <h1 class="h2"><i class="fas fa-cow me-2"></i>Lista de Gados</h1>
+                    <div class="d-flex gap-2">
+                        <a href="{{ path('app_home') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-1"></i> Pagina inicial
+                        </a>
+                        
+                        <a href="{{ path('cow_new') }}" class="btn btn-success">
+                            <i class="fas fa-plus me-1"></i> Adicionar Gado
+                        </a>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-body p-0">
@@ -51,7 +57,7 @@
                                 {% else %}
                                     <tr>
                                         <td colspan="7" class="text-center py-4 text-muted">
-                                            <i class="fas fa-info-circle me-2"></i> Nenhuma vaca registrada
+                                            <i class="fas fa-info-circle me-2"></i> Nenhuma gado registrado
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -60,6 +66,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(cows) }}
             </div>
         </div>
     </div>

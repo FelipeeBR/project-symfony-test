@@ -29,7 +29,7 @@ class CowService {
         }
         $cowFarm = $cow->getFarm();
         if(!$cowFarm) {
-            throw new \Exception("A vaca deve estar associada a uma fazenda");
+            throw new \Exception("O Gado deve estar associado a uma fazenda");
         }
 
         if($cow->getBirth() > new \DateTime()) {
@@ -42,7 +42,7 @@ class CowService {
         }
 
         if(count($farm->getCows()) >= $allowedQuantity) {
-            throw new BadRequestHttpException('Essa fazenda já possui o número máximo de vacas');
+            throw new BadRequestHttpException('Essa fazenda já possui o número máximo de gados');
         }
 
         $this->entityManager->persist($cow);

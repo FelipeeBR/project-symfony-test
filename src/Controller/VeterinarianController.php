@@ -10,13 +10,32 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Form\VeterinarianType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 final class VeterinarianController extends AbstractController
 {
     #[Route('/veterinarians', name: 'veterinarian_index', methods: ['GET'])]
-    public function index(VeterinarianRepository $veterinarianRepository): Response {
+    public function index(VeterinarianRepository $veterinarianRepository, PaginatorInterface $paginator, Request $request): Response {
+        $queryBuilder = $veterinarianRepository->createQueryBuilder('v');
+
+        if($request->query->get('sort')) {
+            $queryBuilder->orderBy(
+                'v.' . $request->query->get('sort'),
+                $request->query->get('direction', 'asc')
+            );
+        } else {
+            $queryBuilder->orderBy('v.id', 'asc');
+        }
+
+        $veterinarians = $paginator->paginate(
+            $queryBuilder->getQuery(),
+            $request->query->getInt('page', 1), 
+            3                     
+        );
+
+
         return $this->render('veterinarian/index.html.twig', [
-            'veterinarians' => $veterinarianRepository->findAll(),
+            'veterinarians' => $veterinarians,
         ]);
     }
 

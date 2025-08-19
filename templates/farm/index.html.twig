@@ -8,9 +8,15 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="h2"><i class="fas fa-cow me-2"></i>Lista de Fazendas</h1>
-                    <a href="{{ path('farm_new') }}" class="btn btn-success">
-                        <i class="fas fa-plus me-1"></i> Adicionar Fazenda
-                    </a>
+                    <div class="d-flex gap-2">
+                        <a href="{{ path('app_home') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-1"></i> Pagina inicial
+                        </a>
+                        
+                        <a href="{{ path('farm_new') }}" class="btn btn-success">
+                            <i class="fas fa-plus me-1"></i> Adicionar Fazenda
+                        </a>
+                    </div> 
                 </div>
                 <div class="card">
                     <div class="card-body p-0">
@@ -56,6 +62,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(farms) }}
             </div>
         </div>
     </div>
