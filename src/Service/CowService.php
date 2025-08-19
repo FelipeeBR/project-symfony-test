@@ -6,6 +6,7 @@ use App\Entity\Cow;
 use App\Repository\CowRepository;
 use App\Repository\FarmRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -48,5 +49,20 @@ class CowService {
         $this->entityManager->flush();
 
         return $cow;
+    }
+
+    public function updateSlaughter(Request $request) {
+        $cowId = $request->getPayload()->get('cowId');
+        $slaughtered = $request->getPayload()->get('slaughtered'); 
+
+        $cow = $this->cowRepository->find($cowId);
+        if (!$cow) {
+            throw new \Exception('Vaca nao encontrada');
+        }
+
+        $cow->setSlaughtered((bool) $slaughtered);
+
+        $this->entityManager->persist($cow);
+        $this->entityManager->flush();
     }
 }

@@ -82,11 +82,21 @@ final class CowController extends AbstractController
         return $this->redirectToRoute('cow_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/lista-abatimentos', name: 'cow_slaughter', methods: ['GET'])]
+    #[Route('/slaughter-list', name: 'cow_slaughter', methods: ['GET'])]
     public function listSlaughters(CowRepository $cowRepository): Response {
         $listSlaughter = $cowRepository->findSlaughter();
         return $this->render('cow/slaughter.html.twig', [
             'listSlaughter' => $listSlaughter,
         ]);
+    }
+
+    #[Route(name: 'cow_update_slaughter', methods: ['PUT'])]
+    public function updateSlaughter(Request $request, CowService $cowService): Response {
+        try {
+            $cowService->updateSlaughter($request);
+            return new Response('success');
+        } catch (\Exception $e) {
+            return new Response('error');
+        }
     }
 }

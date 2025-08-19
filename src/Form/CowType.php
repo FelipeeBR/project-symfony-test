@@ -6,6 +6,7 @@ use App\Entity\Cow;
 use App\Entity\Farm;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,6 +20,10 @@ class CowType extends AbstractType
             ->add('food', null, ['label' => 'Ração consumido por semana (em quilogramas)'])
             ->add('weight', null, ['label' => 'Peso (em quilogramas)'])
             ->add('birth', null, ['label' => 'Data de nascimento'])
+            ->add('slaughtered', CheckboxType::class, [
+                'label'    => 'Animal abatido?',
+                'required' => false,
+            ])
             ->add('farm', EntityType::class, [
                 'class' => Farm::class,
                 'choice_label' => 'name',

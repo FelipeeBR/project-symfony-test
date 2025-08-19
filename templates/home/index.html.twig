@@ -3,8 +3,24 @@
 {% block title %}Página Inicial{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1 class="text-primary">Inicio</h1>
-        <p>Agora essa é a tela inicial!</p>
+    <div class="container mt-4">
+        <h3>Bem Vindo(a)</h3>
+        <div class="d-flex gap-2 justify-content-center"> 
+            <a href="{{ path('farm_index') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i> Gerenciar Fazendas
+            </a>
+
+            <a href="{{ path('cow_index') }}" class="btn btn-warning">
+                <i class="fas fa-plus me-1"></i> Gerenciar Gados
+            </a>
+
+            <a href="{{ path('veterinarian_index') }}" class="btn btn-success">
+                <i class="fas fa-plus me-1"></i> Gerenciar Veterinários
+            </a>
+
+            <a href="{{ path('cow_slaughter') }}" class="btn btn-secondary">
+                <i class="fas fa-plus me-1"></i> Animais para o Abate
+            </a>
+        </div>
     </div>
 {% endblock %}
