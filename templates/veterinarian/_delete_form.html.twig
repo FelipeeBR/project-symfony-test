@@ -1,5 +1,4 @@
-<form action="{{ path('veterinarian_delete', {'id': veterinarian.id}) }}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir?');">
+<form method="post" action="{{ path('veterinarian_delete', {'id': veterinarian.id}) }}" onsubmit="return confirm('Tem certeza que deseja excluir?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ veterinarian.id) }}">
-    <input type="hidden" name="_method" value="DELETE">
-    <button type="submit">Deletar</button>
+    <button class="btn btn-danger btn-sm">Deletar</button>
 </form>

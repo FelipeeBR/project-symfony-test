@@ -13,9 +13,8 @@ class VeterinarianType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('crmv')
-            ->add('save', SubmitType::class, ['label' => 'Adicionar'])
+            ->add('name', null, ['label' => 'Nome do Veterinário'])
+            ->add('crmv', null, ['label' => 'CRMV'])
         ;
     }
 
