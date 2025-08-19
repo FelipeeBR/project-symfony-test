@@ -90,13 +90,15 @@ final class CowController extends AbstractController
         ]);
     }
 
-    #[Route(name: 'cow_update_slaughter', methods: ['PUT'])]
-    public function updateSlaughter(Request $request, CowService $cowService): Response {
-        try {
-            $cowService->updateSlaughter($request);
-            return new Response('success');
-        } catch (\Exception $e) {
-            return new Response('error');
+    #[Route('/cow/{id}/slaughter', name: 'cow_update_slaughter', methods: ['GET'])]
+    public function updateSlaughter(int $id, CowRepository $cowRepository, EntityManagerInterface $em): Response {
+        $cow = $cowRepository->find($id);
+        if(!$cow) {
+            throw $this->createNotFoundException('Animal não encontrado');
         }
-    }
+
+        $cow->setSlaughtered(true);
+        $em->flush();
+        return $this->redirectToRoute('cow_index');
+}
 }

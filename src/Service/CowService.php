@@ -50,19 +50,4 @@ class CowService {
 
         return $cow;
     }
-
-    public function updateSlaughter(Request $request) {
-        $cowId = $request->getPayload()->get('cowId');
-        $slaughtered = $request->getPayload()->get('slaughtered'); 
-
-        $cow = $this->cowRepository->find($cowId);
-        if (!$cow) {
-            throw new \Exception('Vaca nao encontrada');
-        }
-
-        $cow->setSlaughtered((bool) $slaughtered);
-
-        $this->entityManager->persist($cow);
-        $this->entityManager->flush();
-    }
 }
