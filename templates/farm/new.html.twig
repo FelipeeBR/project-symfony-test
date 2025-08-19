@@ -3,9 +3,21 @@
 {% block title %}Cadastrar Nova Fazenda{% endblock %}
 
 {% block body %}
-    <h1>Nova Fazenda</h1>
-
-    {{ include('farm/_form.html.twig') }}
-
-    <a href="{{ path('farm_index') }}">Voltar</a>
+    <div class="container mt-4">
+        <h1 class="h3 mb-3">Novo cadastro</h1>
+        <div class="d-flex justify-content-end mb-3 gap-2">
+            <a href="{{ path('farm_index') }}" class="btn btn-secondary btn-sm">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="h3 mb-0">Preencha os campos</h3>
+            </div>
+            
+            <div class="card-body">
+                {{ include('farm/_form.html.twig', {'button_label': 'Salvar'}) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

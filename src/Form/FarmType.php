@@ -15,15 +15,15 @@ class FarmType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('size')
-            ->add('responsible')
+            ->add('name', null, ['label' => 'Nome da Fazenda'])
+            ->add('size', null, ['label' => 'Tamanho em (HA)'])
+            ->add('responsible', null, ['label' => 'Responsável'])
             ->add('veterinarian', EntityType::class, [
                 'class' => Veterinarian::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'multiple' => true,
+                'label' => 'Veterinários',
             ])
-            ->add('save', SubmitType::class, ['label' => 'Adicionar'])
         ;
     }
 

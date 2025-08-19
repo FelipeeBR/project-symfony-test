@@ -1,13 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editar Fazenda{% endblock %}
+{% block title %}Editar Fazenda {{ farm.name }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Farm</h1>
-
-    {{ include('farm/_form.html.twig', {'button_label': 'Atualizar'}) }}
-
-    <a href="{{ path('farm_index') }}">Voltar</a>
-
-    {{ include('farm/_delete_form.html.twig') }}
+    <div class="container mt-4">
+        <h1 class="h3 mb-3">Editar fazenda: {{ farm.name }}</h1>
+        <div class="d-flex justify-content-end mb-3 gap-2">
+            <a href="{{ path('farm_index') }}" class="btn btn-secondary btn-sm">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+            {{ include('farm/_delete_form.html.twig') }}
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="h3 mb-0">Preencha os campos</h3>
+            </div>
+            
+            <div class="card-body">
+                {{ include('farm/_form.html.twig', {'button_label': 'Atualizar'}) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
