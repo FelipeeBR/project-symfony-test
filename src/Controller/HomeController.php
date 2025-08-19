@@ -13,10 +13,12 @@ class HomeController extends AbstractController
     public function index(CowRepository $cowRepository): Response {
         $totalMilk = $cowRepository->findTotalMilk();
         $totalFood = $cowRepository->findTotalFood();
+        $totalCowAndFood = $cowRepository->findTotalCowAndFood();
 
         return $this->render('home/index.html.twig', [
             'totalMilk' => $totalMilk,
-            'totalFood' => $totalFood
+            'totalFood' => $totalFood,
+            'totalCowAndFood' => $totalCowAndFood
         ]);
     }
 }

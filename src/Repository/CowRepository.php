@@ -60,4 +60,19 @@ class CowRepository extends ServiceEntityRepository
 
         return $result->fetchOne();
     }
+
+    public function findTotalCowAndFood() {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT COUNT(*) AS total_animals
+                FROM cow
+                WHERE food > 500
+                AND TIMESTAMPDIFF(YEAR, birth, CURDATE()) < 1;
+        ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery();
+
+        return $result->fetchAssociative();
+    }
 }
