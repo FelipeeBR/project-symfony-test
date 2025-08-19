@@ -33,6 +33,14 @@
                             <th class="bg-light">CRMV</th>
                             <td>{{ veterinarian.crmv }}</td>
                         </tr>
+                        <tr>
+                            <th class="bg-light">Fazendas</th>
+                            <td>
+                                {% for farm in farms %}
+                                    {{ farm.name }} |
+                                {% endfor %}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

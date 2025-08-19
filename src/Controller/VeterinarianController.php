@@ -41,8 +41,17 @@ final class VeterinarianController extends AbstractController
 
     #[Route('/veterinarian/{id<\d+>}', name: 'veterinarian_show', methods: ['GET'])]
     public function show(string $id, VeterinarianRepository $veterinarianRepository): Response {
+        $veterinarian = $veterinarianRepository->find($id);
+    
+        if(!$veterinarian) {
+            throw $this->createNotFoundException('veterinario nao encontrado');
+        }
+
+        $farms = $veterinarian->getFarms();
+
         return $this->render('veterinarian/show.html.twig', [
-            'veterinarian' => $veterinarianRepository->find($id),
+            'veterinarian' => $veterinarian,
+            'farms' => $farms
         ]);
     }
 

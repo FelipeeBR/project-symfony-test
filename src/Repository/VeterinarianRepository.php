@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Farm;
 use App\Entity\Veterinarian;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,8 +17,7 @@ class VeterinarianRepository extends ServiceEntityRepository
         parent::__construct($registry, Veterinarian::class);
     }
 
-    public function findByCrmv(string $crmv): ?Veterinarian
-    {
+    public function findByCrmv(string $crmv): ?Veterinarian {
         return $this->createQueryBuilder('v')
             ->andWhere('v.crmv = :crmv')
             ->setParameter('crmv', $crmv)
