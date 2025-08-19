@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Relátorio Semanal Animais{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h2"><i class="fas fa-cow me-2"></i>Animais até 1 ano e 500Kg+ de ração por semana</h1>
+                </div>
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="text-nowrap">#ID</th>
+                                        <th class="text-nowrap">Código</th>
+                                        <th class="text-nowrap">Leite (L)</th>
+                                        <th class="text-nowrap">Ração (kg)</th>
+                                        <th class="text-nowrap">Peso (kg)</th>
+                                        <th class="text-nowrap">Nascimento</th>
+                                        <th class="text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for cow in cowAndFood %}
+                                    <tr>
+                                        <td>{{ cow.id }}</td>
+                                        <td><strong>{{ cow.code }}</strong></td>
+                                        <td>{{ cow.milk|number_format(2, ',', '.') }}</td>
+                                        <td>{{ cow.food|number_format(2, ',', '.') }}</td>
+                                        <td>{{ cow.weight|number_format(2, ',', '.') }}</td>
+                                        <td>{{ cow.birth ? cow.birth|date('d/m/Y') : '-' }}</td>
+                                        <td class="text-end">
+                                            <div class="d-flex gap-2 justify-content-center">
+                                                <a href="{{ path('cow_show', {'id': cow.id}) }}" class="btn btn-primary btn-sm" title="Visualizar">
+                                                    <i class="fas fa-eye"></i> Visualizar
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7" class="text-center py-4 text-muted">
+                                            <i class="fas fa-info-circle me-2"></i> Nenhuma gado registrado
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

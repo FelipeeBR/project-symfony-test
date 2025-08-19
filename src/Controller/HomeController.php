@@ -29,4 +29,12 @@ class HomeController extends AbstractController
             'listSlaughtered' => $listSlaughtered,
         ]);
     }
+
+    #[Route('/report', name: 'app_report')]
+    public function reportCowAndFood(CowRepository $cowRepository): Response {
+        $cowAndFood = $cowRepository->findCowAndFood();
+        return $this->render('home/report.html.twig', [
+            'cowAndFood' => $cowAndFood,
+        ]);
+    }
 }
