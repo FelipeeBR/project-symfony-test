@@ -12,9 +12,11 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(CowRepository $cowRepository): Response {
         $totalMilk = $cowRepository->findTotalMilk();
+        $totalFood = $cowRepository->findTotalFood();
 
         return $this->render('home/index.html.twig', [
             'totalMilk' => $totalMilk,
+            'totalFood' => $totalFood
         ]);
     }
 }
