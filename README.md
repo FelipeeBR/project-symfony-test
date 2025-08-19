@@ -33,3 +33,20 @@
   - Peso: peso do animal em quilos;
   - Nascimento: data de nascimento do animal;
   - Fazenda: fazenda a que o gado pertence (ManyToOne).
+
+  ### Relatórios
+- Relatório de animais abatidos;
+- Relatório da quantidade total de leite produzido por semana (Tela inicial);
+- Relatório da quantidade total de ração necessária por semana (Tela inicial);
+- Relatório da quantidade total de animais que tenham até 1 ano de idade e que consumam mais de 500Kg de ração por semana (Tela inicial).
+
+### Requisitos de sistema
+- Adicionar ao projeto, o pacote KnpLabs/KnpPaginatorBundle, para paginação e ordenação dos registros em tela;
+- Usar as flash messages do próprio framework para notificações dentro do sistema, dando um feedback das ações realizadas, melhorando a experiência do usuário;
+- Criar funções customizadas no repository para buscas mais elaboradas no BD.
+
+### Imagens
+![Captura de tela 2025-08-19 023103](https://github.com/user-attachments/assets/2af4b49d-13a9-4d14-94d7-5e45c31cdd5f)
+![Captura de tela 2025-08-19 023310](https://github.com/user-attachments/assets/0e26c380-4663-4700-84e5-e054177d687a)
+![Captura de tela 2025-08-19 023033](https://github.com/user-attachments/assets/c4fa7f2c-30f8-40a5-b623-97a395f445dd)
+
