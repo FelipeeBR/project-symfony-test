@@ -34,4 +34,17 @@ class CowRepository extends ServiceEntityRepository
 
         return $result->fetchAllAssociative();
     }
+
+    public function findTotalMilk() {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT SUM(milk) FROM cow c
+            WHERE c.slaughtered = 0
+        ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery();
+
+        return $result->fetchOne();
+    }
 }
