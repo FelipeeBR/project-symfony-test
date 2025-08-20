@@ -16,7 +16,7 @@
                     {% else %}
                         {{ form_widget(field, {
                             'attr': {
-                                'class': 'form-control' ~ (field.vars.valid ? '' : ' is-invalid')
+                                'class': (field.vars.attr.class|default('')) ~ ' form-control' ~ (field.vars.valid ? '' : ' is-invalid')
                             }
                         }) }}
                     {% endif %}

@@ -1,7 +1,13 @@
 //import './bootstrap.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-console.log("Encore está funcionando!");
+import Inputmask from "inputmask";
+
+document.addEventListener("DOMContentLoaded", () => {
+    Inputmask({regex: "CRMV-[A-Z]{2}-[0-9]{4,6}"}).mask(document.querySelectorAll(".input-crmv"));
+    Inputmask({regex: "[A-Z]{3}-[0-9]{4}-[0-9]{4,6}"}).mask(document.querySelectorAll(".input-code"));
+});
+
 /*
  * Welcome to your app's main JavaScript file!
  *

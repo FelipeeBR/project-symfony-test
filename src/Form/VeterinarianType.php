@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class VeterinarianType extends AbstractType
 {
@@ -14,7 +15,13 @@ class VeterinarianType extends AbstractType
     {
         $builder
             ->add('name', null, ['label' => 'Nome do Veterinário'])
-            ->add('crmv', null, ['label' => 'CRMV'])
+            ->add('crmv', TextType::class, [
+                'attr' => [
+                    'class' => 'input-crmv',
+                    'placeholder' => 'CRMV-MG-00000',
+                ],
+                'label' => 'CRMV'
+            ]);
         ;
     }
 

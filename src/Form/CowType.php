@@ -7,6 +7,7 @@ use App\Entity\Farm;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,14 @@ class CowType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('code', null, ['label' => 'Código', 'required' => true])
+            ->add('code', TextType::class,  [
+                'attr' => [
+                    'class' => 'input-code',
+                    'placeholder' => 'FAZ-2025-00000',
+                ],
+                'label' => 'Código',
+                'required' => true
+            ])
             ->add('milk', null, ['label' => 'Leite produzido por semana (em litros)'])
             ->add('food', null, ['label' => 'Ração consumido por semana (em quilogramas)'])
             ->add('weight', null, ['label' => 'Peso (em quilogramas)'])
