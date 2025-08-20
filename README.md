@@ -26,7 +26,8 @@ php bin/console doctrine:migrations:migrate
 - Docker
 - MySQL (MariaDB)
 - Bootstrap
-- KnpLabs/KnpPaginatorBundle 
+- KnpLabs/KnpPaginatorBundle
+- inputmask
 
 ### Qual o objetivo?
 - Utilize o PHP e preferencialmente os frameworks Symfony ou Laravel para desenvolver um sistema que auxilie no controle de uma fazenda de bovinos.
