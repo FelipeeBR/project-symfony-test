@@ -1,7 +1,5 @@
 # Full Stack Developer Test - DFranquias
 
-## Candidato: Felipe Mendes
-
 ### Como Instalar?
 1 - Clone o projeto
 
